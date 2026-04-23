@@ -18,12 +18,13 @@ def index():
 def cadastrar_usuario():
     data = request.json
     nome = data.get('nome')
+    email = data.get('email')
     senha = data.get('senha')
-    if not nome or not senha:
-        return jsonify({'erro': 'Nome e senha são obrigatórios'}), 400
+    if not nome or not senha or not email:
+        return jsonify({'erro': 'Nome, email e senha são obrigatórios'}), 400
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO usuarios (nome, senha) VALUES (?, ?)', (nome, senha))
+    cursor.execute('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', (nome, email, senha))
     conn.commit()
     conn.close()
     return jsonify({'mensagem': 'Usuário cadastrado com sucesso!'}), 201
