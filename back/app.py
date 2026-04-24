@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sqlite3
+import hashlib, check_password
 
 app = Flask(__name__)
 CORS(app)
@@ -13,6 +14,21 @@ app = Flask(__name__, static_folder='../main', static_url_path='')
 def index():
     return app.send_static_file('index.html')
 
+# Função para hash de senha
+def make_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def home(request):
+    if request.method == 'POST':
+        username = request.POST.get('nome')
+        password = request.POST.get('senha')
+        if not username or not check_password(password, cadastrar_usuario.senha):
+            return jsonify({'error': 'Nome e senha são obrigatórios'}), 400
+        request.session['user_id'] = cadastrar_usuario.id
+        request.session['username'] = cadastrar_usuario.nome
+        return jsonify({'message': 'Login realizado com sucesso!'}), 200
+    return jsonify({'message': 'Bem-vindo à página inicial!'}), 200
+
 # Rota para cadastrar usuário
 @app.route('/api/usuarios', methods=['POST'])
 def cadastrar_usuario():
@@ -22,9 +38,11 @@ def cadastrar_usuario():
     senha = data.get('senha')
     if not nome or not senha or not email:
         return jsonify({'erro': 'Nome, email e senha são obrigatórios'}), 400
+    senha_hash = make_password(senha)
+    
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', (nome, email, senha))
+    cursor.execute('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', (nome, email, senha_hash))
     conn.commit()
     conn.close()
     return jsonify({'mensagem': 'Usuário cadastrado com sucesso!'}), 201
@@ -36,9 +54,10 @@ def login():
     senha = data.get('senha')
     if not nome or not senha:
         return jsonify({'erro': 'Nome e senha são obrigatórios'}), 400
+    senha_hash = make_password(senha)
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM usuarios WHERE nome = ? AND senha = ?', (nome, senha))
+    cursor.execute('SELECT * FROM usuarios WHERE nome = ? AND senha = ?', (nome, senha_hash))
     user = cursor.fetchone()
     conn.close()
     if user:
