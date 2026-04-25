@@ -5,7 +5,7 @@ import hashlib
 from datetime import datetime
 
 # Configuração do Flask para servir arquivos estáticos
-app = Flask(__name__, static_folder='../main', static_url_path='')
+app = Flask(__name__, static_folder='../main/', static_url_path='')
 CORS(app)
 DB_PATH = 'models.db'
 
@@ -25,7 +25,7 @@ def make_password(password):
 #Serve a página inicial"""
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return app.send_static_file('cadastro/index.html')
 
 def home(request):
     if request.method == 'POST':
@@ -63,21 +63,27 @@ def cadastrar_usuario():
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.json
-    nome = data.get('nome')
+    email = data.get('email')
     senha = data.get('senha')
-    if not nome or not senha:
-        return jsonify({'erro': 'Nome e senha são obrigatórios'}), 400
+    if not email or not senha:
+        return jsonify({'erro': 'Email e senha são obrigatórios'}), 400
     senha_hash = make_password(senha)
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM usuarios WHERE nome = ? AND senha = ?', (nome, senha_hash))
+        cursor.execute('SELECT * FROM usuarios WHERE email = ? AND senha = ?', (email, senha_hash))
         user = cursor.fetchone()
         conn.close()
         if user:
-            return jsonify({'mensagem': 'Login realizado com sucesso!'}), 200
+            return jsonify({'mensagem': 'Login realizado com sucesso!',
+                            'usuario': {
+                                'id': user[0],
+                                'email': user[1],
+                                'senha': user[2]
+                                        }
+                            }), 200
         else:
-            return jsonify({'erro': 'Nome ou senha incorretos'}), 401
+            return jsonify({'erro': 'Email ou senha incorretos'}), 401
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
 
@@ -116,3 +122,6 @@ def criar_comentario():
         return jsonify({'mensagem': 'Comentário criado com sucesso!'}), 201
     except Exception as e:
         return jsonify({'erro': str(e)}), 500
+    
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)
