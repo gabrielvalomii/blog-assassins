@@ -3,37 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Login</title>
+    <title>Cadastro - Blog Assassins Cred</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="cadastro-page">
     <div class="container">
         <div class="left-panel">
-            <div class="left-text">
-                <span class="blog-title">blog da comunidade assasins cred</span><br>
-                <span class="dev-sign">dev:Gabriel valomi</span>
+            <div class="left-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h1 class="blog-title">Blog Assassins Cred</h1>
+                <p class="blog-subtitle">Junte-se à nossa comunidade de desenvolvedores e entusiastas de tecnologia</p>
+                <div class="benefits">
+                    <div class="benefit">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <h4>Comunidade</h4>
+                            <p>Conecte-se com desenvolvedores de todo o mundo</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <h4>Conhecimento</h4>
+                            <p>Compartilhe e aprenda novos conceitos</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <i class="fas fa-rocket"></i>
+                        <div>
+                            <h4>Crescimento</h4>
+                            <p>Desenvolva suas habilidades com a comunidade</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="dev-sign">💻 Desenvolvido por Gabriel Valomi</p>
             </div>
         </div>
         <div class="right-panel">
-            <form class="cadastro-form">
-                <h2>Cadastro</h2>
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" required>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required>
-                <label for="confirmar-senha">Confirmar Senha</label>
-                <input type="password" id="confirmar-senha" name="confirmar-senha" required>
-                <button type="submit">Cadastrar</button>
+            <form class="cadastro-form" id="cadastroForm">
+                <div class="form-header">
+                    <h2>Criar Conta</h2>
+                    <p>Comece sua jornada agora</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">
+                            <i class="fas fa-user"></i> Nome Completo
+                        </label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="usuario">
+                        <i class="fas fa-at"></i> Usuário (handle)
+                    </label>
+                    <input type="text" id="usuario" name="usuario" placeholder="@seu_usuario" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">
+                        <i class="fas fa-lock"></i> Senha
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="senha" name="senha" placeholder="Crie uma senha forte" required>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small class="password-hint">Mínimo 8 caracteres, com letras e números</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar-senha">
+                        <i class="fas fa-lock"></i> Confirmar Senha
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirme sua senha" required>
+                        <button type="button" class="toggle-password" id="togglePasswordConfirm">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="termos" name="termos" required>
+                    <label for="termos">
+                        Concordo com os <a href="#" class="link-inline">Termos de Serviço</a> e 
+                        <a href="#" class="link-inline">Política de Privacidade</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-cadastro">
+                    <span>Criar Conta</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <div class="divider">
+                    <span>ou</span>
+                </div>
+
+                <button type="button" class="btn-social" id="googleCadastro">
+                    <i class="fab fa-google"></i> Cadastrar com Google
+                </button>
+
                 <div class="login-links">
-                    <a href="#" class="login-link">Redefinir senha</a>
-                    <span class="link-sep">|</span>
-                    <a href="#" class="login-link">logar com conta existente</a>
+                    <span>Já possui conta?</span>
+                    <a href="../login/login.html" class="link">
+                        <i class="fas fa-sign-in-alt"></i> Fazer login
+                    </a>
                 </div>
             </form>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

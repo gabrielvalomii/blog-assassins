@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - Blog Assassins</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <h1 class="navbar-logo">📖 Blog Assassins</h1>
+            </div>
+            <div class="navbar-center">
+                <div class="search-box">
+                    <input type="text" placeholder="Pesquisar...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <button class="nav-btn" title="Notificações">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="nav-btn" title="Mensagens">
+                    <i class="fas fa-envelope"></i>
+                </button>
+                <div class="user-menu">
+                    <img src="https://via.placeholder.com/32" alt="Perfil" class="user-avatar">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Sidebar Esquerdo -->
+        <aside class="sidebar-left">
+            <div class="profile-card">
+                <img src="https://via.placeholder.com/120" alt="Capa" class="profile-cover">
+                <div class="profile-info">
+                    <img src="https://via.placeholder.com/64" alt="Avatar" class="profile-avatar">
+                    <h3>Gabriel Valomi</h3>
+                    <p class="profile-handle">@gabriel_dev</p>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <span class="stat-value">1.2K</span>
+                        <span class="stat-label">Seguidores</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">342</span>
+                        <span class="stat-label">Seguindo</span>
+                    </div>
+                </div>
+                <a href="#" class="btn-profile">Ver Perfil Completo</a>
+            </div>
+
+            <div class="menu-section">
+                <h4 class="menu-title">Menu</h4>
+                <ul class="menu-list">
+                    <li><a href="#" class="menu-item active"><i class="fas fa-home"></i> Início</a></li>
+                    <li><a href="#" class="menu-item"><i class="fas fa-user"></i> Perfil</a></li>
+                    <li><a href="#" class="menu-item"><i class="fas fa-pen-fancy"></i> Postagens</a></li>
+                    <li><a href="#" class="menu-item"><i class="fas fa-comments"></i> Comentários</a></li>
+                    <li><a href="#" class="menu-item"><i class="fas fa-heart"></i> Favoritos</a></li>
+                    <li><a href="#" class="menu-item"><i class="fas fa-bookmark"></i> Salvos</a></li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <h4 class="menu-title">Comunidade</h4>
+                <ul class="menu-list">
+                    <li><a href="#" class="menu-item"><i class="fas fa-users"></i> Amigos</a></li>
+                    <li><a href="#" class="menu-item"><i class="fas fa-hashtag"></i> Tendências</a></li>
+                    <li><a href="#" class="menu-item"><i class="fas fa-cog"></i> Configurações</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </aside>
+
+        <!-- Feed Principal -->
+        <main class="feed-container">
+            <!-- Criar Postagem -->
+            <div class="create-post">
+                <div class="create-post-header">
+                    <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar-small">
+                    <input type="text" class="post-input" placeholder="No que você está pensando?">
+                </div>
+                <div class="create-post-actions">
+                    <button class="post-action-btn">
+                        <i class="fas fa-image"></i> Foto/Vídeo
+                    </button>
+                    <button class="post-action-btn">
+                        <i class="fas fa-smile"></i> Sentimento
+                    </button>
+                    <button class="post-action-btn">
+                        <i class="fas fa-map-marker-alt"></i> Local
+                    </button>
+                    <button class="btn-post-primary">Postar</button>
+                </div>
+            </div>
+
+            <!-- Posts do Feed -->
+            <article class="post">
+                <div class="post-header">
+                    <div class="post-author">
+                        <img src="https://via.placeholder.com/48" alt="Avatar" class="avatar-post">
+                        <div>
+                            <h4>João Silva</h4>
+                            <span class="post-time">há 2 horas</span>
+                        </div>
+                    </div>
+                    <button class="post-menu-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+
+                <div class="post-content">
+                    <p>Acabei de descobrir um framework incrível para desenvolvimento! Recomendo muito para quem quer iniciar em web development. 🚀</p>
+                    <img src="https://via.placeholder.com/500x300" alt="Post image" class="post-image">
+                </div>
+
+                <div class="post-stats">
+                    <span><i class="fas fa-heart"></i> 234 curtidas</span>
+                    <span><i class="fas fa-comment"></i> 45 comentários</span>
+                    <span><i class="fas fa-share"></i> 12 compartilhamentos</span>
+                </div>
+
+                <div class="post-actions">
+                    <button class="action-btn">
+                        <i class="far fa-heart"></i> Curtir
+                    </button>
+                    <button class="action-btn">
+                        <i class="far fa-comment"></i> Comentar
+                    </button>
+                    <button class="action-btn">
+                        <i class="far fa-share"></i> Compartilhar
+                    </button>
+                </div>
+
+                <div class="post-comments">
+                    <div class="comment">
+                        <img src="https://via.placeholder.com/32" alt="Avatar" class="avatar-comment">
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <strong>Maria Santos</strong>
+                                <span class="comment-time">há 1 hora</span>
+                            </div>
+                            <p>Muito bom mesmo! Estou aprendendo também! 😊</p>
+                            <div class="comment-actions">
+                                <button>Curtir</button>
+                                <button>Responder</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment">
+                        <img src="https://via.placeholder.com/32" alt="Avatar" class="avatar-comment">
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <strong>Pedro Costa</strong>
+                                <span class="comment-time">há 30 min</span>
+                            </div>
+                            <p>Qual framework você está usando? Quer dizer qual é a recomendação?</p>
+                            <div class="comment-actions">
+                                <button>Curtir</button>
+                                <button>Responder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post">
+                <div class="post-header">
+                    <div class="post-author">
+                        <img src="https://via.placeholder.com/48" alt="Avatar" class="avatar-post">
+                        <div>
+                            <h4>Ana Paula</h4>
+                            <span class="post-time">há 5 horas</span>
+                        </div>
+                    </div>
+                    <button class="post-menu-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+
+                <div class="post-content">
+                    <p>Que dia incrível no projeto! Conseguimos finalizar o sprint inteiro. Parabéns ao time! 🎉</p>
+                </div>
+
+                <div class="post-stats">
+                    <span><i class="fas fa-heart"></i> 189 curtidas</span>
+                    <span><i class="fas fa-comment"></i> 28 comentários</span>
+                    <span><i class="fas fa-share"></i> 8 compartilhamentos</span>
+                </div>
+
+                <div class="post-actions">
+                    <button class="action-btn">
+                        <i class="far fa-heart"></i> Curtir
+                    </button>
+                    <button class="action-btn">
+                        <i class="far fa-comment"></i> Comentar
+                    </button>
+                    <button class="action-btn">
+                        <i class="far fa-share"></i> Compartilhar
+                    </button>
+                </div>
+            </article>
+
+            <article class="post">
+                <div class="post-header">
+                    <div class="post-author">
+                        <img src="https://via.placeholder.com/48" alt="Avatar" class="avatar-post">
+                        <div>
+                            <h4>Carlos Mendes</h4>
+                            <span class="post-time">há 8 horas</span>
+                        </div>
+                    </div>
+                    <button class="post-menu-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+
+                <div class="post-content">
+                    <p>Dica do dia: Sempre faça backup de seus projetos! Aprendi da forma difícil hoje 😅</p>
+                </div>
+
+                <div class="post-stats">
+                    <span><i class="fas fa-heart"></i> 412 curtidas</span>
+                    <span><i class="fas fa-comment"></i> 67 comentários</span>
+                    <span><i class="fas fa-share"></i> 23 compartilhamentos</span>
+                </div>
+
+                <div class="post-actions">
+                    <button class="action-btn">
+                        <i class="far fa-heart"></i> Curtir
+                    </button>
+                    <button class="action-btn">
+                        <i class="far fa-comment"></i> Comentar
+                    </button>
+                    <button class="action-btn">
+                        <i class="far fa-share"></i> Compartilhar
+                    </button>
+                </div>
+            </article>
+        </main>
+
+        <!-- Sidebar Direito (Tendências/Sugestões) -->
+        <aside class="sidebar-right">
+            <div class="trending-card">
+                <h3>Tendências Para Você</h3>
+                <div class="trending-item">
+                    <div>
+                        <p class="trending-label">Tecnologia • Tendência</p>
+                        <h4>#WebDevelopment</h4>
+                        <p class="trending-posts">1.2M posts</p>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div>
+                        <p class="trending-label">Programação • Tendência</p>
+                        <h4>#Python</h4>
+                        <p class="trending-posts">890K posts</p>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div>
+                        <p class="trending-label">Design • Tendência</p>
+                        <h4>#UX/UI</h4>
+                        <p class="trending-posts">654K posts</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="suggestions-card">
+                <h3>Sugestões Para Você</h3>
+                <div class="suggestion-item">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="avatar-small">
+                    <div class="suggestion-info">
+                        <h5>Lucas Martins</h5>
+                        <p>Seguido por João Silva</p>
+                    </div>
+                    <button class="btn-follow">Seguir</button>
+                </div>
+                <div class="suggestion-item">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="avatar-small">
+                    <div class="suggestion-info">
+                        <h5>Juliana Rocha</h5>
+                        <p>Seguido por Maria Santos</p>
+                    </div>
+                    <button class="btn-follow">Seguir</button>
+                </div>
+                <div class="suggestion-item">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="avatar-small">
+                    <div class="suggestion-info">
+                        <h5>Felipe Oliveira</h5>
+                        <p>Seguido por Ana Paula</p>
+                    </div>
+                    <button class="btn-follow">Seguir</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
