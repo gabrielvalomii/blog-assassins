@@ -1,11 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import sqlite3
 import hashlib
 from datetime import datetime
+import os
 
 # Configuração do Flask para servir arquivos estáticos
-app = Flask(__name__, static_folder='../main/', static_url_path='')
+app = Flask(__name__, static_folder='../main/static', template_folder='../main/templates', static_url_path='/static')
 CORS(app)
 DB_PATH = 'models.db'
 
@@ -15,6 +16,8 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row  # Permite acessar colunas por nome
     return conn
 
+
+
 def check_password(password, hashed):
     return make_password(password) == hashed
 
@@ -22,21 +25,15 @@ def check_password(password, hashed):
 def make_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-#Serve a página inicial"""
+#Serve a página inicial
 @app.route('/')
 def index():
-    return app.send_static_file('cadastro/index.html')
+    return render_template('login/login.html')
 
-def home(request):
-    if request.method == 'POST':
-        username = request.POST.get('nome')
-        password = request.POST.get('senha')
-        if not username or not check_password(password, cadastrar_usuario.senha):
-            return jsonify({'error': 'Nome e senha são obrigatórios'}), 400
-        request.session['user_id'] = cadastrar_usuario.id
-        request.session['username'] = cadastrar_usuario.nome
-        return jsonify({'message': 'Login realizado com sucesso!'}), 200
-    return jsonify({'message': 'Bem-vindo à página inicial!'}), 200
+# Serve a página de cadastro
+@app.route('/cadastro')
+def cadastro_page():
+    return render_template('cadastro/cadastro.html')
 
 # Rota para cadastrar usuário
 @app.route('/api/usuarios', methods=['POST'])
