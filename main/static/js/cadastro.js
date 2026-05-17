@@ -7,7 +7,7 @@ const senhaInput = document.getElementById('senha');
 // ==================== Inicialização ====================
 document.addEventListener('DOMContentLoaded', () => {
     configurarEventos();
-    console.log('✅ Sistema de cadastro carregado!');
+    console.log('Sistema de cadastro carregado!');
 });
 
 // ==================== Configurar Eventos ====================
@@ -25,7 +25,6 @@ async function realizarCadastro(e) {
     const email = emailInput.value.trim();
     const senha = senhaInput.value.trim();
 
-    // Validações básicas
     if (!nome || !email || !senha) {
         mostrarMensagem('Por favor, preencha todos os campos!', 'error');
         return;
@@ -46,18 +45,17 @@ async function realizarCadastro(e) {
         return;
     }
 
-    // Desabilitar botão durante o envio
     const btnCadastro = document.querySelector('.btn-login');
     const textoOriginal = btnCadastro.innerHTML;
+
     btnCadastro.disabled = true;
     btnCadastro.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
 
     try {
-        // Enviar para o backend Flask
         const response = await fetch('/api/usuarios', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 nome: nome,
@@ -68,30 +66,26 @@ async function realizarCadastro(e) {
 
         const data = await response.json();
 
-        if (data.success) {
-            mostrarMensagem('✅ ' + data.message, 'success');
-            
-            // Salvar usuário no localStorage
+        if (response.ok) {
+            mostrarMensagem(data.mensagem || 'Cadastro realizado com sucesso!', 'success');
+
             if (data.usuario) {
                 localStorage.setItem('current_user', JSON.stringify(data.usuario));
             }
 
-            // Limpar formulário
             cadastroForm.reset();
 
-            // Redirecionar após 2 segundos
             setTimeout(() => {
                 window.location.href = '/';
-            }, 2000);
+            }, 1500);
         } else {
-            mostrarMensagem('❌ ' + data.message, 'error');
+            mostrarMensagem(data.erro || 'Erro ao cadastrar usuário.', 'error');
         }
 
     } catch (error) {
         console.error('Erro ao fazer cadastro:', error);
-        mostrarMensagem('❌ Erro ao conectar com o servidor. Tente novamente.', 'error');
+        mostrarMensagem('Erro ao conectar com o servidor. Tente novamente.', 'error');
     } finally {
-        // Reabilitar botão
         btnCadastro.disabled = false;
         btnCadastro.innerHTML = textoOriginal;
     }
@@ -105,25 +99,27 @@ function validarEmail(email) {
 
 // ==================== Mostrar Mensagens ====================
 function mostrarMensagem(mensagem, tipo) {
-    // Remover mensagem anterior se existir
     const alertaAntigo = document.querySelector('.alert');
+
     if (alertaAntigo) {
         alertaAntigo.remove();
     }
 
-    // Criar nova mensagem
     const alerta = document.createElement('div');
     alerta.className = `alert alert-${tipo}`;
     alerta.textContent = mensagem;
 
-    // Inserir antes do primeiro form-group
     const primeiroGrupo = document.querySelector('.form-group');
-    primeiroGrupo.parentNode.insertBefore(alerta, primeiroGrupo);
 
-    // Remover após 5 segundos
+    if (primeiroGrupo && primeiroGrupo.parentNode) {
+        primeiroGrupo.parentNode.insertBefore(alerta, primeiroGrupo);
+    } else {
+        document.body.prepend(alerta);
+    }
+
     setTimeout(() => {
         alerta.remove();
     }, 5000);
 }
 
-console.log('✅ Script de cadastro carregado com sucesso!');
+console.log('Script de cadastro carregado com sucesso!');

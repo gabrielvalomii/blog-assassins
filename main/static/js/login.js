@@ -6,7 +6,7 @@ const senhaInput = document.getElementById('senha');
 // ==================== Inicialização ====================
 document.addEventListener('DOMContentLoaded', () => {
     configurarEventos();
-    console.log('✅ Sistema de Login carregado!');
+    console.log('Sistema de Login carregado!');
 });
 
 // ==================== Configurar Eventos ====================
@@ -23,7 +23,6 @@ async function realizarLogin(e) {
     const email = emailInput.value.trim();
     const senha = senhaInput.value.trim();
 
-    // Validações básicas
     if (!email || !senha) {
         mostrarMensagem('Por favor, preencha email e senha!', 'error');
         return;
@@ -34,18 +33,17 @@ async function realizarLogin(e) {
         return;
     }
 
-    // Desabilitar botão durante o envio
     const btnLogin = document.querySelector('.btn-login');
     const textoOriginal = btnLogin.innerHTML;
+
     btnLogin.disabled = true;
     btnLogin.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
 
     try {
-        // Enviar para o backend Flask
         const response = await fetch('/api/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: email,
@@ -55,28 +53,26 @@ async function realizarLogin(e) {
 
         const data = await response.json();
 
-        if (data.success) {
-            mostrarMensagem('✅ ' + data.message, 'success');
-            
-            // Salvar usuário no localStorage
-            localStorage.setItem('current_user', JSON.stringify(data.usuario));
+        if (response.ok) {
+            mostrarMensagem(data.mensagem || 'Login realizado com sucesso!', 'success');
 
-            // Limpar formulário
+            if (data.usuario) {
+                localStorage.setItem('current_user', JSON.stringify(data.usuario));
+            }
+
             loginForm.reset();
 
-            // Redirecionar após 1 segundo
             setTimeout(() => {
-                window.location.href = '/';
+                window.location.href = '/principal';
             }, 1000);
         } else {
-            mostrarMensagem('❌ ' + data.message, 'error');
+            mostrarMensagem(data.erro || 'Email ou senha inválidos.', 'error');
         }
 
     } catch (error) {
         console.error('Erro ao fazer login:', error);
-        mostrarMensagem('❌ Erro ao conectar com o servidor. Tente novamente.', 'error');
+        mostrarMensagem('Erro ao conectar com o servidor. Tente novamente.', 'error');
     } finally {
-        // Reabilitar botão
         btnLogin.disabled = false;
         btnLogin.innerHTML = textoOriginal;
     }
@@ -90,25 +86,27 @@ function validarEmail(email) {
 
 // ==================== Mostrar Mensagens ====================
 function mostrarMensagem(mensagem, tipo) {
-    // Remover mensagem anterior se existir
     const alertaAntigo = document.querySelector('.alert');
+
     if (alertaAntigo) {
         alertaAntigo.remove();
     }
 
-    // Criar nova mensagem
     const alerta = document.createElement('div');
     alerta.className = `alert alert-${tipo}`;
     alerta.textContent = mensagem;
 
-    // Inserir antes do primeiro form-group
     const primeiroGrupo = document.querySelector('.form-group');
-    primeiroGrupo.parentNode.insertBefore(alerta, primeiroGrupo);
 
-    // Remover após 5 segundos
+    if (primeiroGrupo && primeiroGrupo.parentNode) {
+        primeiroGrupo.parentNode.insertBefore(alerta, primeiroGrupo);
+    } else {
+        document.body.prepend(alerta);
+    }
+
     setTimeout(() => {
         alerta.remove();
     }, 5000);
 }
 
-console.log('✅ Script de Login carregado com sucesso!');
+console.log('Script de Login carregado com sucesso!');
