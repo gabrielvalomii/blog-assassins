@@ -54,7 +54,7 @@ async function realizarCadastro(e) {
 
     try {
         // Enviar para o backend Flask
-        const response = await fetch('/api/cadastro', {
+        const response = await fetch('/api/usuarios', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

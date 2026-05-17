@@ -6,7 +6,7 @@ cursor = conn.cursor()
 
 # Cria tabela de usuários
 cursor.execute('''
-CREATE TABLE IF NOT EXISTS cadastro (
+CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     nome TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS postagens (
     titulo TEXT NOT NULL,
     conteudo TEXT NOT NULL,
     autor_id INTEGER,
-    FOREIGN KEY (autor_id) REFERENCES cadastro (id)
+    FOREIGN KEY (autor_id) REFERENCES usuarios (id)
 )
 ''')
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS comentarios (
     postagem_id INTEGER,
     autor_id INTEGER,
     FOREIGN KEY (postagem_id) REFERENCES postagens (id),
-    FOREIGN KEY (autor_id) REFERENCES cadastro (id)
+    FOREIGN KEY (autor_id) REFERENCES usuarios (id)
 )
 ''')
 

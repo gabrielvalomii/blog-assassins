@@ -45,7 +45,7 @@ def principal_page():
     return render_template('principal/principal.html')
 
 # Rota para cadastrar usuário
-@app.route('/api/cadastro', methods=['POST'])
+@app.route('/api/usuarios', methods=['POST'])
 def cadastrar_usuario():
     data = request.json
     nome = data.get('nome')
@@ -57,7 +57,7 @@ def cadastrar_usuario():
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO cadastro (nome, email, senha) VALUES (?, ?, ?)', (nome, email, senha_hash))
+        cursor.execute('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', (nome, email, senha_hash))
         conn.commit()
         conn.close()
         return jsonify({'mensagem': 'Usuário cadastrado com sucesso!'}), 201
@@ -77,7 +77,7 @@ def login():
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM cadastro WHERE email = ? AND senha = ?', (email, senha_hash))
+        cursor.execute('SELECT * FROM usuarios WHERE email = ? AND senha = ?', (email, senha_hash))
         user = cursor.fetchone()
         conn.close()
         if user:
