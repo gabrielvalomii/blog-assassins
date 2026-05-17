@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Blog Assassins Cred</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/principal.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-blog"></i>
+                <span>Blog Assassins Cred</span>
+            </div>
+            <div class="navbar-user">
+                <span class="user-name" id="userName">Usuário</span>
+                <button class="btn-logout" id="btnLogout">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        
+        <aside class="sidebar-left">
+            <div class="profile-card">
+                <div class="profile-avatar" id="userAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 class="profile-name" id="profileName">Nome do Usuário</h3>
+                <p class="profile-email" id="profileEmail">email@exemplo.com</p>
+                
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalPosts">0</span>
+                        <span class="stat-label">Posts</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalComments">0</span>
+                        <span class="stat-label">Comentários</span>
+                    </div>
+                </div>
+
+                <button class="btn-edit-profile">
+                    <i class="fas fa-edit"></i> Editar Perfil
+                </button>
+            </div>
+        </aside>
+
+
+        <main class="feed-container">
+            
+
+            <div class="create-post-box">
+                <div class="create-post-header">
+                    <i class="fas fa-pen"></i>
+                    <span>O que você está pensando?</span>
+                </div>
+                <textarea class="create-post-input" id="postContent" placeholder="Escreva algo interessante..." rows="3"></textarea>
+                <input type="text" class="create-post-title" id="postTitle" placeholder="Título do post">
+                <button class="btn-publish" id="btnPublish">
+                    <i class="fas fa-paper-plane"></i> Publicar
+                </button>
+            </div>
+
+
+            <div class="posts-list" id="postsList">
+
+            </div>
+        </main>
+
+
+        <aside class="sidebar-right">
+            <div class="recent-comments-card">
+                <h3>
+                    <i class="fas fa-comments"></i> 
+                    Comentários Recentes
+                </h3>
+                <div class="comments-list" id="recentCommentsList">
+
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/principal.js') }}"></script>
+</body>
+</html>
