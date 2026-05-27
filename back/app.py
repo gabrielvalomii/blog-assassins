@@ -32,9 +32,9 @@ def page():
     return render_template('login/login.html')
 
 # Serve a página de cadastro
-@app.route('/cadastro')
+@app.route('/index')
 def cadastro_page():
-    return render_template('cadastro/cadastro.html')
+    return render_template('index/index.html')
 
 @app.route('/login')
 def login_page():
